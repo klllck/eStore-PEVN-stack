@@ -2,8 +2,7 @@
   <button
     class="
       bg-transparent
-      hover:bg-green-500
-      hover:text-white
+      hover:bg-green-500 hover:text-white
       border-2 border-green-500
       hover:border-transparent
       text-xl

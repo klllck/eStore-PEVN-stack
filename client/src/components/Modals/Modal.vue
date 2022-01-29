@@ -6,11 +6,11 @@
   <div class="absolute inset-0">
     <div class="flex h-full">
       <div class="z-30 m-auto bg-white p-2 rounded shadow w-10/12 md:w-1/3">
-        <div class="p-2 border">
+        <div class="p-2 ">
           <h1 class="text-2xl">
             <slot name="title"></slot>
           </h1>
-          <main>
+          <main class="flex flex-col">
             <slot name="body"></slot>
           </main>
         </div>
