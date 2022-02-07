@@ -6,6 +6,7 @@
         class="border-2 border-gray-200 rounded-sm p-2 my-4"
         type="text"
         placeholder="Введите название типа..."
+        v-model="type"
       />
       <div class="flex">
         <div class="ml-auto mr-0">
@@ -30,6 +31,7 @@
               rounded-sm
               hover:bg-green-500 hover:text-white
             "
+            @click="addType"
           >
             Добавить
           </button>
@@ -40,16 +42,25 @@
 </template>
 
 <script>
+import { ref } from "vue";
 import Modal from "@/components/Modals/Modal";
+import { createType } from "../../apis/productApi";
 
 export default {
   components: { Modal },
   setup(_, { emit }) {
+    const type = ref("");
+
     function close() {
       emit("close");
     }
 
-    return { close };
+    function addType() {
+      createType(type.value).then((data) => (type.value = ""));
+      close();
+    }
+
+    return { close, addType, type };
   },
 };
 </script>

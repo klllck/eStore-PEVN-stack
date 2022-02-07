@@ -43,6 +43,21 @@
             sm:static sm:inset-auto sm:ml-6 sm:pr-0
           "
         >
+          <router-link
+            v-if="isAuth"
+            :to="'/admin'"
+            class="
+              bg-white
+              hover:bg-green-600 hover:text-white
+              px-3
+              py-2
+              rounded-lg
+              text-lg
+              mx-4
+            "
+          >
+            Админка
+          </router-link>
           <button
             v-if="isAuth"
             @click="logout"
@@ -93,9 +108,8 @@ export default {
       return store.state.user.isAuth;
     });
 
-    function login() {}
-
     function logout() {
+      store.state.user.user = {};
       store.state.user.isAuth = false;
     }
 

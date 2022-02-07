@@ -22,7 +22,19 @@
 </template>
 
 <script>
-export default {};
+import { onMounted } from "vue";
+import { useStore } from "vuex";
+import { getTypes } from "../apis/productApi";
+
+export default {
+  setup() {
+    const store = useStore();
+
+    onMounted(() => {
+      getTypes().then((data) => store.commit("product/setTypes", data));
+    });
+  },
+};
 </script>
 
 <style>

@@ -16,7 +16,7 @@
         items-center
       "
     >
-      {{ title }}
+      {{ selectedItem !== "" ? selectedItem : title }}
       <svg
         class="ml-2 w-4 h-4"
         fill="none"
@@ -48,11 +48,11 @@
         top-12
       "
     >
-      <ul class="py-1" aria-labelledby="dropdownButton">
+      <ul class="py-1">
         <li v-for="(item, i) in items" :key="i">
           <div
-            href="#"
             class="block py-2 px-4 text-md text-gray-700 hover:bg-gray-100"
+            @click="selectItem(item.name)"
           >
             {{ item.name }}
           </div>
@@ -69,8 +69,13 @@ export default {
   props: ["title", "items"],
   setup() {
     const isOpen = ref(false);
+    const selectedItem = ref("");
 
-    return { isOpen };
+    function selectItem(item) {
+      selectedItem.value = item;
+    }
+
+    return { isOpen, selectedItem, selectItem };
   },
 };
 </script>

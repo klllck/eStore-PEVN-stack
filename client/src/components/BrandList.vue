@@ -23,7 +23,19 @@
 </template>
 
 <script>
-export default {};
+import { onMounted } from "vue";
+import { useStore } from "vuex";
+import { getBrands } from "../apis/productApi";
+
+export default {
+  setup() {
+    const store = useStore();
+
+    onMounted(() => {
+      getBrands().then((data) => store.commit("product/setBrands", data));
+    });
+  },
+};
 </script>
 
 <style>

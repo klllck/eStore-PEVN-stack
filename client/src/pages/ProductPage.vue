@@ -1,7 +1,7 @@
 <template>
   <div class="container m-auto mt-4">
     <div class="flex flex-wrap justify-between">
-      <img class="w-96 h-96" :src="product.img" />
+      <img class="w-96 h-96" :src="apiUrl + product.img" />
       <div class="flex flex-col items-center">
         <div class="text-3xl mb-4">
           {{ product.name }}
@@ -38,41 +38,39 @@
       <div class="text-3xl mb-4">Характеристики</div>
       <div
         class="py-3"
-        v-for="(info, index) in description"
+        v-for="(info, index) in product"
         :key="info.id"
         :style="{
           background: index % 2 === 0 ? 'lightgray' : 'transperent',
           padding: '10px',
         }"
       >
-        {{ info.title }}: {{ info.description }}
+        {{ info.title }} {{ info.description }}
       </div>
     </section>
   </div>
 </template>
 
 <script>
-import Button from '@/components/UI/Button'
+import Button from "@/components/UI/Button";
+import { onMounted, ref } from "vue";
+import { useRoute } from "vue-router";
+import { getProductById } from "../apis/productApi";
 
 export default {
   components: { Button },
   setup() {
-    const product = {
-      id: 0,
-      name: "Samsung Galaxy A21",
-      price: 299,
-      rating: 3.2,
-      img: "./server/static/a69a409f-e732-40aa-a111-eb8a15b54ef2.jpg",
-    };
-    const description = [
-      { id: 1, title: "Оперативная память", description: "8гб" },
-      { id: 2, title: "Процессор", description: "Snapdragon 840" },
-      { id: 4, title: "Кол-во ядер", description: "16" },
-      { id: 3, title: "Камера", description: "64 Мп" },
-      { id: 5, title: "Аккумулятор", description: "5400 мАч" },
-    ];
+    const route = useRoute();
+    const apiUrl = ref(process.env.VUE_APP_API_URL);
+    const product = ref("");
 
-    return { product, description };
+    onMounted(() => {
+      getProductById(route.params.id).then((data) => {
+        product.value = data;
+      });
+    });
+
+    return { product, apiUrl };
   },
 };
 </script>
