@@ -16,9 +16,21 @@
 import TypeList from "@/components/TypeList";
 import BrandList from "@/components/BrandList";
 import ProductList from "@/components/ProductList";
+import { useStore } from "vuex";
+import { onMounted } from "vue";
+import { getBrands, getTypes, getProducts } from "../apis/productApi";
 
 export default {
   components: { TypeList, BrandList, ProductList },
+  setup() {
+    const store = useStore();
+
+    onMounted(() => {
+      getBrands().then((data) => store.commit("product/setBrands", data));
+      getTypes().then((data) => store.commit("product/setTypes", data));
+      getProducts().then((data) => store.commit("product/setProducts", data.rows));
+    });
+  },
 };
 </script>
 

@@ -56,7 +56,7 @@ export default {
     }
 
     function addType() {
-      createType(type.value).then((data) => (type.value = ""));
+      createType({ name: type.value });
       close();
     }
 

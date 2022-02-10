@@ -6,6 +6,7 @@
         class="border-2 border-gray-200 rounded-sm p-2 my-4"
         type="text"
         placeholder="Введите название бренда..."
+        v-model="brand"
       />
       <div class="flex">
         <div class="ml-auto mr-0">
@@ -30,6 +31,7 @@
               rounded-sm
               hover:bg-green-500 hover:text-white
             "
+            @click="addBrand"
           >
             Добавить
           </button>
@@ -40,16 +42,25 @@
 </template>
 
 <script>
+import { ref } from "vue";
 import Modal from "@/components/Modals/Modal";
+import { createBrand } from "../../apis/productApi";
 
 export default {
   components: { Modal },
   setup(_, { emit }) {
+    const brand = ref("");
+
     function close() {
       emit("close");
     }
 
-    return { close };
+    function addBrand() {
+      createBrand({ name: brand.value });
+      close();
+    }
+
+    return { close, addBrand, brand };
   },
 };
 </script>

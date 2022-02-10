@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Auth from "@/components/Modals/Auth";
-import Main from "@/pages/Main";
 import Products from "@/pages/Products";
 import ProductPage from "@/pages/ProductPage";
 import Admin from "@/pages/Admin";
@@ -9,11 +8,7 @@ import ShoppingCart from "@/pages/ShoppingCart";
 const routes = [
   {
     path: "/",
-    component: Main,
-  },
-  {
-    path: "/main",
-    component: Main,
+    component: Products,
   },
   {
     path: "/auth",

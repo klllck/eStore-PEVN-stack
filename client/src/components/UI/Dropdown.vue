@@ -67,12 +67,13 @@ import { ref } from "vue";
 
 export default {
   props: ["title", "items"],
-  setup() {
+  setup(_, { emit }) {
     const isOpen = ref(false);
     const selectedItem = ref("");
 
     function selectItem(item) {
       selectedItem.value = item;
+      emit("item", selectedItem);
     }
 
     return { isOpen, selectedItem, selectItem };

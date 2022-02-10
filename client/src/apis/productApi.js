@@ -1,7 +1,7 @@
 import { $authHost, $host } from "./index";
 
 export const createType = async (type) => {
-  const { data } = await $authHost.post("api/type", { type });
+  const { data } = await $authHost.post("api/type", type);
   return data;
 };
 
@@ -11,7 +11,7 @@ export const getTypes = async () => {
 };
 
 export const createBrand = async (brand) => {
-  const { data } = await $authHost.post("api/brand", { brand });
+  const { data } = await $authHost.post("api/brand",  brand);
   return data;
 };
 
@@ -21,7 +21,7 @@ export const getBrands = async () => {
 };
 
 export const createProduct = async (product) => {
-  const { data } = await $authHost.post("api/product", { product });
+  const { data } = await $authHost.post("api/product", product);
   return data;
 };
 

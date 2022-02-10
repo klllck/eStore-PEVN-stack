@@ -6,7 +6,10 @@
       :key="product.id"
       :to="'/product/' + product.id"
     >
-      <img class="w-48 h-48 border border-gray-50" :src="apiUrl + product.img" />
+      <img
+        class="w-48 h-48 border border-gray-100 border-b-0"
+        :src="apiUrl + product.img"
+      />
       <div class="flex items-center justify-between mt-1">
         <div class="text-lg text-gray-500">Type...</div>
         <div class="flex items-center">
@@ -21,22 +24,12 @@
 </template>
 
 <script>
-import { onMounted, ref } from "vue";
-import { useStore } from "vuex";
-import { getProducts, getProductById } from "../apis/productApi";
+import { ref } from "vue";
 
 export default {
   setup() {
-    const store = useStore();
     const apiUrl = ref(process.env.VUE_APP_API_URL);
-
-    onMounted(() => {
-      getProducts().then((data) => {
-        store.commit("product/setProducts", data.rows);
-      });
-    });
-
-    return { apiUrl }
+    return { apiUrl };
   },
 };
 </script>
