@@ -16,7 +16,7 @@
         items-center
       "
     >
-      {{ selectedItem !== "" ? selectedItem : title }}
+      {{ selectedItem !== "" ? selectedItem.name : title }}
       <svg
         class="ml-2 w-4 h-4"
         fill="none"
@@ -52,7 +52,7 @@
         <li v-for="(item, i) in items" :key="i">
           <div
             class="block py-2 px-4 text-md text-gray-700 hover:bg-gray-100"
-            @click="selectItem(item.name)"
+            @click="selectItem(item.name, item.id)"
           >
             {{ item.name }}
           </div>
@@ -71,8 +71,8 @@ export default {
     const isOpen = ref(false);
     const selectedItem = ref("");
 
-    function selectItem(item) {
-      selectedItem.value = item;
+    function selectItem(name, id) {
+      selectedItem.value = { id, name };
       emit("item", selectedItem);
     }
 

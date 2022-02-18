@@ -38,14 +38,14 @@
       <div class="text-3xl mb-4">Характеристики</div>
       <div
         class="py-3"
-        v-for="(info, index) in product"
+        v-for="(info, index) in product.info"
         :key="info.id"
         :style="{
           background: index % 2 === 0 ? 'lightgray' : 'transperent',
           padding: '10px',
         }"
       >
-        {{ info.title }} {{ info.description }}
+        {{ info.title }}: {{ info.description }}
       </div>
     </section>
   </div>

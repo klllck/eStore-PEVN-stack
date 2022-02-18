@@ -11,7 +11,7 @@
       "
       v-for="type in $store.state.product.types"
       :key="type.id"
-      @click="$store.commit('product/setSelectedType', type)"
+      @click="$store.dispatch('product/selectType', type)"
       :class="{
         active: type.id === $store.state.product.selectedType.id,
       }"

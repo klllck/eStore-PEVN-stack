@@ -6,7 +6,7 @@ const path = require("path");
 class ProductController {
   async create(req, res, next) {
     try {
-      const { name, price, brandId, typeId, info } = req.body;
+      let { name, price, brandId, typeId, info } = req.body;
       const { img } = req.files;
       let fileName = uuid.v4() + ".jpg";
       img.mv(path.resolve(__dirname, "..", "static", fileName));
@@ -21,13 +21,13 @@ class ProductController {
 
       if (info) {
         info = JSON.parse(info);
-        info.forEach((el) => {
+        info.forEach(i => 
           ProductInfo.create({
-            title: el.title,
-            description: el.description,
-            productId: el.productId,
-          });
-        });
+            title: i.title,
+            description: i.description,
+            productId: product.id,
+          })
+        );
       }
 
       return res.json(product);

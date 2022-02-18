@@ -149,11 +149,12 @@ export default {
       formData.append("name", name.value);
       formData.append("price", `${price.value}`);
       formData.append("img", file.value);
-      formData.append('info', JSON.stringify(info.value))
-      // formData.append("typeId", store.getters.getSelectedType.id);
-      // formData.append("brandId", store.getters.getSelectedBrand.id);
-      console.log(store.state.product.selectedBrand);
-      //console.log(formData);
+      formData.append("typeId", store.state.product.selectedType.id);
+      formData.append("brandId", store.state.product.selectedBrand.id);
+      formData.append("info", JSON.stringify(info.value));
+      console.log(JSON.stringify(info.value));
+
+      createProduct(formData).then((data) => close());
     }
 
     function selectFile(e) {
@@ -163,12 +164,12 @@ export default {
 
     function selectType(e) {
       type.value = e.value;
-      store.commit('product/setSelectedType', type.value)
+      store.commit("product/setSelectedType", type.value);
     }
 
     function selectBrand(e) {
       brand.value = e.value;
-      store.commit('product/setSelectedBrand', brand.value)
+      store.commit("product/setSelectedBrand", brand.value);
     }
 
     function close() {

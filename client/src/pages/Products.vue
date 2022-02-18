@@ -1,12 +1,13 @@
 <template>
   <div class="m-auto">
     <div class="flex flex-wrap">
-      <section class="w-1/4 bg-gray-100">
+      <section class="w-1/6 bg-gray-100">
         <TypeList />
       </section>
-      <section class="w-3/4 px-12 mt-4">
+      <section class="w-5/6 px-12 mt-4">
         <BrandList />
         <ProductList />
+        <Pages />
       </section>
     </div>
   </div>
@@ -16,27 +17,17 @@
 import TypeList from "@/components/TypeList";
 import BrandList from "@/components/BrandList";
 import ProductList from "@/components/ProductList";
-import { useStore } from "vuex";
-import { onMounted } from "vue";
-import { getBrands, getTypes, getProducts } from "../apis/productApi";
+import Pages from "@/components/UI/Pages";
 
 export default {
-  components: { TypeList, BrandList, ProductList },
-  setup() {
-    const store = useStore();
-
-    onMounted(() => {
-      getBrands().then((data) => store.commit("product/setBrands", data));
-      getTypes().then((data) => store.commit("product/setTypes", data));
-      getProducts().then((data) => store.commit("product/setProducts", data.rows));
-    });
-  },
+  components: { TypeList, BrandList, ProductList, Pages },
 };
 </script>
 
 <style>
 .active {
   background: rgba(16, 185, 129);
+  border-color: rgba(16, 185, 129);
   color: white;
 }
 </style>

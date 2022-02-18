@@ -12,7 +12,7 @@
       "
       v-for="brand in $store.state.product.brands"
       :key="brand.id"
-      @click="$store.commit('product/setSelectedBrand', brand)"
+      @click="$store.dispatch('product/selectBrand', brand)"
       :class="{
         active: brand.id === $store.state.product.selectedBrand.id,
       }"
